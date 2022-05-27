@@ -10,15 +10,19 @@
 
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        intervals.sort(key = lambda pair : pair[0])
-        output = [intervals[0]]
+        intervals.sort(key = lambda pair : pair[0]) #sorts value
+        output = [intervals[0]] # gets first array within matrix/2D array
         
         for start, end in intervals:
-            lastEnd = output[-1][1]
+            lastEnd = output[-1][1] # gets last element from previous array
             
-            if start <= lastEnd: 
+            # if the current starting element from current array is less than
+            # or equal to the last element from previous array
+            if start <= lastEnd:  
                 # merge
+                # we update the the previous array and take the max of previous ending element
+                # to the current ending element
                 output[-1][1] = max(lastEnd, end)
             else:
-                output.append([start, end])
+                output.append([start, end]) # else, we append the array to the matrix/2d array
         return output
