@@ -12,13 +12,26 @@
 
 class Solution:
     def maxArea(self, height: List[int]) -> int:
+        # Assign left pointer to the very left
+        # and right pointer to the very right
         l, r = 0, len(height) - 1
+        # store the result of the area (length x width)
+        # we initialize result to 0 as an area can't be negative
         res = 0
         
+        # left pointer can only by less than right pointer
         while l < r:
+            # store the highest result of the previous result value
+            # to the current result value
             res = max(res, min(height[l], height[r]) * (r - l))
+            # if the height of the left pointer is less than the
+            # height of the right pointer, we move the left pointer 
+            # up one position
             if height[l] < height[r]:
                 l += 1
+            # else, we move the right pointer to the next position
             elif height[r] <= height[l]:
                 r -= 1
+         
+        # we return the max area
         return res
