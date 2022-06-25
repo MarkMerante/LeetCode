@@ -8,6 +8,7 @@
 # Output: [[1,6],[8,10],[15,18]]
 # Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6]
 
+#Review
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         intervals.sort(key = lambda pair : pair[0]) #sorts value
