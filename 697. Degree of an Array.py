@@ -5,12 +5,14 @@
 
 # Your task is to find the smallest possible length of a (contiguous) 
 # subarray of nums, that has the same degree as nums.
-
 class Solution:
     def findShortestSubArray(self, nums: List[int]) -> int:
+        if nums is None:
+            return 0
+        
         numsFrequency = {}
-        currentMin = [float('inf')]
-        l, r = 0, 0
+        l = 0
+        r = l 
         
         for i in nums:
             numsFrequency[i] = 1 + numsFrequency.get(i, 0)
@@ -18,4 +20,17 @@ class Solution:
         maxFrequency = max(numsFrequency, key=numsFrequency.get)
         
         
-        if r < len(nums):
+        while l < len(nums):
+            if nums[l] == maxFrequency:
+                break
+            else:
+                l +=1 
+        
+        while r < len(nums):
+            if nums[r] == maxFrequency:
+                currentR = r
+                shortArray = nums[l:currentR]
+            else:
+                r+=1
+        
+        return len(shortArray[l:currentR]) + 1
